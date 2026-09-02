@@ -1,0 +1,43 @@
+# 配置模板:复制本文件为 config.yaml 并填入你的真实密钥。
+#   cp manifest/config/config.yaml.example manifest/config/config.yaml
+# 注意:config.yaml 已被 .gitignore 忽略,请勿提交真实密钥。
+#
+# https://goframe.org/docs/web/server-config-file-template
+server:
+  address: ":8000"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+
+# https://goframe.org/docs/core/glog-config
+logger:
+  level: "all"
+  stdout: true
+
+# DeepSeek「思考」模型(火山引擎 ARK,OpenAI 兼容接口)
+ds_think_chat_model:
+  api_key: "your-ark-api-key"
+  base_url: "https://ark.cn-beijing.volces.com/api/v3"
+  model: "deepseek-v3-2-251201"
+
+# DeepSeek「快速」模型
+ds_quick_chat_model:
+  api_key: "your-ark-api-key"
+  base_url: "https://ark.cn-beijing.volces.com/api/v3"
+  model: "deepseek-v3-2-251201"
+
+# 嵌入模型(阿里云 DashScope text-embedding-v4)
+doubao_embedding_model:
+  api_key: "your-dashscope-api-key"
+  base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  model: "text-embedding-v4"
+
+# 知识库文档目录(改成本机绝对路径)
+file_dir: "/your/path/OncallAgent/internal/ai/cmd/knowledge_cmd/docs"
+
+# MCP 地址(本地部署方案)
+mcp_url: "http://localhost:3000/sse"
+
+# Redis 向量库连接(RediSearch)
+redis:
+  addr: "localhost:6370"
+  password: "your-redis-password"

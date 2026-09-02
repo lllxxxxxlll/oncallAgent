@@ -4,20 +4,32 @@ import (
 	tools2 "OncallAgent/internal/ai/tools"
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/cloudwego/eino-ext/components/model/openai"
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/schema"
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 func main() {
 	ctx := context.Background()
 	// 创建 ChatModel
+	model, err := g.Cfg().Get(ctx, "ds_think_chat_model.model")
+	if err != nil {
+		panic(err)
+	}
+	apiKey, err := g.Cfg().Get(ctx, "ds_think_chat_model.api_key")
+	if err != nil {
+		panic(err)
+	}
+	baseURL, err := g.Cfg().Get(ctx, "ds_think_chat_model.base_url")
+	if err != nil {
+		panic(err)
+	}
 	config := &openai.ChatModelConfig{
-		APIKey:  os.Getenv("ARK_API_KEY"),
-		Model:   "deepseek-v3-1-terminus",
-		BaseURL: "https://ark.cn-beijing.volces.com/api/v3",
+		Model:   model.String(),
+		APIKey:  apiKey.String(),
+		BaseURL: baseURL.String(),
 	}
 	chatModel, err := openai.NewChatModel(ctx, config)
 	if err != nil {
