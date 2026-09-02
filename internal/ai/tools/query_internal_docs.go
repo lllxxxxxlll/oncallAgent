@@ -1,7 +1,7 @@
 package tools
 
 import (
-	"SuperBizAgent/internal/ai/retriever"
+	"OncallAgent/internal/ai/retriever"
 	"context"
 	"encoding/json"
 	"log"

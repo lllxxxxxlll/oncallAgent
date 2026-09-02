@@ -43,7 +43,7 @@ chmod +x start.sh
 ### 上传成功后
 - 会显示绿色的成功提示
 - 显示上传的文件名和文件大小
-- 文件会保存到 `/Users/wuxufei/GolandProjects/SuperBizAgent/docs/` 目录
+- 文件会保存到 `/Users/wuxufei/GolandProjects/OncallAgent/docs/` 目录
 
 ## 后端 API
 
@@ -64,7 +64,7 @@ chmod +x start.sh
   "message": "OK",
   "data": {
     "fileName": "example.pdf",
-    "filePath": "/Users/wuxufei/GolandProjects/SuperBizAgent/docs/example.pdf",
+    "filePath": "/Users/wuxufei/GolandProjects/OncallAgent/docs/example.pdf",
     "fileSize": 1024000
   }
 }

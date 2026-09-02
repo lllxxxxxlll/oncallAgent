@@ -1,9 +1,9 @@
 package indexer
 
 import (
-	embedder2 "SuperBizAgent/internal/ai/embedder"
-	"SuperBizAgent/utility/client"
-	"SuperBizAgent/utility/common"
+	embedder2 "OncallAgent/internal/ai/embedder"
+	"OncallAgent/utility/client"
+	"OncallAgent/utility/common"
 	"context"
 
 	"github.com/cloudwego/eino-ext/components/indexer/milvus"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	retriever2 "SuperBizAgent/internal/ai/retriever"
+	retriever2 "OncallAgent/internal/ai/retriever"
 	"context"
 	"fmt"
 )

@@ -1,8 +1,8 @@
 package chat
 
 import (
-	"SuperBizAgent/api/chat/v1"
-	"SuperBizAgent/internal/ai/agent/plan_execute_replan"
+	"OncallAgent/api/chat/v1"
+	"OncallAgent/internal/ai/agent/plan_execute_replan"
 	"context"
 	"errors"
 )

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"SuperBizAgent/internal/controller/chat"
-	"SuperBizAgent/utility/common"
-	"SuperBizAgent/utility/middleware"
+	"OncallAgent/internal/controller/chat"
+	"OncallAgent/utility/common"
+	"OncallAgent/utility/middleware"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"

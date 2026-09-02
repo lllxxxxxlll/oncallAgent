@@ -18,3 +18,9 @@ temp.yaml
 bin
 
 manifest/docker/volumes
+
+# ---- 敏感信息:密钥 / 本地配置 / 编译产物(勿提交) ----
+.env
+/cmd
+manifest/config/config.yaml
+internal/ai/cmd/chat_cmd/config/config.yaml

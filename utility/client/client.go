@@ -1,7 +1,7 @@
 package client
 
 import (
-	"SuperBizAgent/utility/common"
+	"OncallAgent/utility/common"
 	"context"
 	"fmt"
 

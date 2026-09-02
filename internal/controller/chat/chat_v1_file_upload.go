@@ -1,12 +1,12 @@
 package chat
 
 import (
-	"SuperBizAgent/api/chat/v1"
-	"SuperBizAgent/internal/ai/agent/knowledge_index_pipeline"
-	loader2 "SuperBizAgent/internal/ai/loader"
-	"SuperBizAgent/utility/client"
-	"SuperBizAgent/utility/common"
-	"SuperBizAgent/utility/log_call_back"
+	"OncallAgent/api/chat/v1"
+	"OncallAgent/internal/ai/agent/knowledge_index_pipeline"
+	loader2 "OncallAgent/internal/ai/loader"
+	"OncallAgent/utility/client"
+	"OncallAgent/utility/common"
+	"OncallAgent/utility/log_call_back"
 	"context"
 	"fmt"
 	"os"

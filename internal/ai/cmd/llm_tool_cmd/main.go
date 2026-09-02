@@ -1,9 +1,10 @@
 package main
 
 import (
-	tools2 "SuperBizAgent/internal/ai/tools"
+	tools2 "OncallAgent/internal/ai/tools"
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/cloudwego/eino-ext/components/model/openai"
 	"github.com/cloudwego/eino/compose"
@@ -14,7 +15,7 @@ func main() {
 	ctx := context.Background()
 	// 创建 ChatModel
 	config := &openai.ChatModelConfig{
-		APIKey:  "bc499880-ede3-4023-8991-2e84c0a83dd1",
+		APIKey:  os.Getenv("ARK_API_KEY"),
 		Model:   "deepseek-v3-1-terminus",
 		BaseURL: "https://ark.cn-beijing.volces.com/api/v3",
 	}

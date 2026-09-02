@@ -1,7 +1,7 @@
 package chat_pipeline
 
 import (
-	"SuperBizAgent/internal/ai/embedder"
+	"OncallAgent/internal/ai/embedder"
 	"context"
 
 	"github.com/cloudwego/eino/components/embedding"
