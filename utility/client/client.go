@@ -93,7 +93,7 @@ func NewMilvusClient(ctx context.Context) (cli.Client, error) {
 		}
 
 		// 为vector字段创建autoindex索引
-		vectorIndex, err := entity.NewIndexAUTOINDEX(entity.HAMMING)
+		vectorIndex, err := entity.NewIndexAUTOINDEX(entity.L2)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create vector index: %w", err)
 		}
@@ -120,9 +120,9 @@ var fields = []*entity.Field{
 	},
 	{
 		Name:     "vector", // 确保字段名匹配
-		DataType: entity.FieldTypeBinaryVector,
+		DataType: entity.FieldTypeFloatVector,
 		TypeParams: map[string]string{
-			"dim": "65536",
+			"dim": "2048",
 		},
 	},
 	{

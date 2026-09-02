@@ -1,0 +1,4 @@
+# Milvus user config override —— 禁止启动时自动恢复 loaded 状态
+queryCoord:
+  enableActiveStandby: false
+  autoHandoff: false

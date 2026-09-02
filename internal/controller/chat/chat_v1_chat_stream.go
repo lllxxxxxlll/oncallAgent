@@ -53,11 +53,18 @@ func (c *ControllerV1) ChatStream(ctx context.Context, req *v1.ChatStreamReq) (r
 		chunk, err := sr.Recv()
 		if errors.Is(err, io.EOF) {
 			client.SendToClient("done", "Stream completed")
+			g.Log().Infof(ctx, "[chat-stream] full response: %s", fullResponse.String())
 			return &v1.ChatStreamRes{}, nil
 		}
 		if err != nil {
 			client.SendToClient("error", err.Error())
+			g.Log().Errorf(ctx, "[chat-stream] recv error: %v", err)
 			return &v1.ChatStreamRes{}, nil
+		}
+		g.Log().Debugf(ctx, "[chat-stream] chunk: role=%s tool_calls=%d content=%s",
+			chunk.Role, len(chunk.ToolCalls), chunk.Content)
+		for _, tc := range chunk.ToolCalls {
+			g.Log().Infof(ctx, "[chat-stream] tool_call: name=%s args=%s", tc.Function.Name, tc.Function.Arguments)
 		}
 		fullResponse.WriteString(chunk.Content)
 		client.SendToClient("message", chunk.Content)

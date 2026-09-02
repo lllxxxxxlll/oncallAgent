@@ -110,7 +110,7 @@ internal/ai/agent/
 ### Eino 关键源码位置
 
 ```
-~/go/pkg/mod/github.com/cloudwego/eino@v0.6.0/
+~/go/pkg/mod/github.com/cloudwego/eino@v0.7.13/
 ├── components/       ← 标准接口定义（Loader、Indexer、Embedder 等）
 ├── compose/          ← Graph/Chain 编排核心
 ├── flow/agent/react/ ← ReAct Agent 实现
@@ -125,12 +125,38 @@ internal/ai/agent/
 
 ## 用户学习状态
 
-> **当前进度详见**: `wiki/20250624/01-当前水平评估.md`
-> **重点问题详见**: `wiki/20250624/02-重点问题清单.md`
-> **下一步计划详见**: `wiki/20250624/03-下一步行动计划.md`
+> **当前进度详见**: `wiki/20260705/01-当前水平评估.md`
+> **重点问题详见**: `wiki/20260705/02-重点问题清单.md`
+> **下一步计划详见**: `wiki/20260705/03-下一步行动计划.md`
+> **InputKey 机制分析**: `wiki/20260705/04-InputKey机制深度分析.md`
+> **Redis Stack 向量库改造**: `wiki/20260712/01-Redis-Stack向量库改造实录.md`
 > **排坑经验详见**: `/home/lenovo/docs/gopls-go-mod-latest-debug.md`
 
-**一句话概况**：Eino 理解 55%（代码阅读层面），正准备动手跑通 test 目录下的知识索引管道。后续将逐步覆盖 Tool 机制、MCP 协议、Milvus、ReAct 源码等组件。
+**当前水平**：Eino 理解 65%（使用层 75% / 原理层 65% / 架构层 35%）；RAG 检索链路已打通索引+检索端到端。
+
+**已完成**：
+- ✅ 阶段一：test/ 管道跑通（Loader → Splitter → Embedding → Redis Indexer）
+- ✅ P0-1 InputKey/OutputKey 机制已攻克（状态字典、泛型 vs Key、Compile 类型检查）
+- ✅ 阶段二·Redis Stack 向量库改造（FT.CREATE 建索引 + 自定义 DocumentConverter 召回，端到端跑通，摸清 Redis vs Milvus 六大差异）
+
+**进行中**：阶段二剩余改造练习；下一步切换 Milvus 对照体会（用户自部署）
+
+**用户的学习风格**：
+- 源码驱动：追框架源码理解底层，不满足于教程层面
+- 假设-验证：提出假设 → 写 test 代码验证 → 修正理解 → 沉淀 wiki
+- 深度优先：一个 topic 死磕到底层，但意识到需要平衡进度，后续 topic 会限时推进
+- 每个 topic 达标标准：能口头讲清楚 + 有源码引用 + 有自己写的验证代码
+
+**test 目录说明**：
+```
+test/         ← 阶段一产物：完整 Knowledge Indexing 管道（泛型模式）
+test/index_schema.go ← Redis Stack 向量索引定义（FT.CREATE，CreateIndex）
+test/retriever.go    ← Redis retriever（自定义 DocumentConverter，distance→Score）
+test/cmd/index/  ← 一次性建索引入口
+test/cmd/recall/ ← KNN 召回入口
+test2/        ← P0-1 验证：any + Key 模式的 Loader → Splitter 管道
+test/cmd/fanin/ ← 多前驱汇聚 demo（OutputKey + mergeValues）
+```
 
 ---
 
@@ -141,15 +167,23 @@ internal/ai/agent/
 1. **解释概念时**：结合项目实际代码举例，不要空谈理论
 2. **指导开发时**：先给方向让用户自己试，只有用户明确要求时才直接给出代码
 3. **遇到排坑**：引导用户按"症状→排查→根因→修复"的链路思考，不要直接给答案
+4. **源码导航**：分析框架机制时引用具体源码文件和行号，不要凭记忆或推测
+5. **循序渐进**：新 topic 先给方向让用户自己试（grep 源码、写 test），卡住 15 分钟后才介入
 
 ### 及时沉淀
 
 1. 每次对话结束时，评估是否有需要写入 wiki 或 docs 的内容
 2. 如果用户没有主动要求但明显有价值，主动提醒："这个要不要沉淀到 wiki/docs 里？"
+3. 每个重要 topic 学完后，主动建议更新 CLAUDE.md 的学习状态
 
 ### 关注面试导向
 
 回答技术问题时，标注这个知识点在面试中的重要程度：
-- 🔴 必问（如：ReAct 原理、RAG 管道）
-- 🟡 高频（如：Graph vs Chain 选择、Tool Calling 机制）
-- ⚪ 加分（如：Eino 源码实现细节、性能优化）
+- 🔴 必问（如：ReAct 原理、RAG 管道、Graph Key 机制）
+- 🟡 高频（如：Graph vs Chain 选择、Tool Calling 机制、Callback AOP）
+- ⚪ 加分（如：Eino 源码实现细节、性能优化、Channel 并发模型）
+
+### 阶段性反馈
+
+1. 每完成一个阶段目标后，给出客观评价（可取/不可取之处 + 打分）
+2. 不回避指出问题（时间效率、AI 依赖度等），帮助用户校准学习方式

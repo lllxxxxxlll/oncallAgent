@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"time"
 
 	"github.com/cloudwego/eino-ext/components/model/openai"
 	"github.com/cloudwego/eino/components/model"
@@ -25,6 +26,7 @@ func OpenAIForDeepSeekV31Think(ctx context.Context) (cm model.ToolCallingChatMod
 		Model:   model.String(),
 		APIKey:  api_key.String(),
 		BaseURL: base_url.String(),
+		Timeout: 60 * time.Second,
 	}
 	cm, err = openai.NewChatModel(ctx, config)
 	if err != nil {
@@ -50,6 +52,7 @@ func OpenAIForDeepSeekV3Quick(ctx context.Context) (cm model.ToolCallingChatMode
 		Model:   model.String(),
 		APIKey:  api_key.String(),
 		BaseURL: base_url.String(),
+		Timeout: 60 * time.Second,
 	}
 	cm, err = openai.NewChatModel(ctx, config)
 	if err != nil {
